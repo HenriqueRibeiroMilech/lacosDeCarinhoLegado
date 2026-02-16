@@ -47,8 +47,8 @@ public class UpdateGiftItemUseCase : IUpdateGiftItemUseCase
             throw new NotFoundException(ResourceErrorMessages.GIFT_ITEM_NOT_FOUND);
         }
 
-        giftItem.Name = request.Name;
-        giftItem.Description = request.Description;
+        giftItem.Name = request.Name ?? string.Empty;
+        giftItem.Description = request.Description ?? string.Empty;
         if (request.Category.HasValue)
         {
             giftItem.Category = (Domain.Enums.GiftCategory)request.Category.Value;

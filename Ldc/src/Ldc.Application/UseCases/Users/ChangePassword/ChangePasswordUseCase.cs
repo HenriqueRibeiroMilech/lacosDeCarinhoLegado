@@ -29,7 +29,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     {
         var loggedUser = await _loggedUser.Get();
         
-        await Validate(request, loggedUser);
+        Validate(request, loggedUser);
         
         var user = await _repository.GetById(loggedUser.Id);
         user.Password = _passwordEncrypter.Encrypt(request.NewPassword);
@@ -39,7 +39,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         await _unitOfWork.Commit();
     }
     
-    private async Task Validate(RequestChangePasswordJson request, User loggedUser)
+    private void Validate(RequestChangePasswordJson request, User loggedUser)
     {
         var validator  = new ChangePasswordValidator();
         

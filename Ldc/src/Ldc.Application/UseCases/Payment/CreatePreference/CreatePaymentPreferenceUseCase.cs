@@ -62,7 +62,9 @@ public class CreatePaymentPreferenceUseCase : ICreatePaymentPreferenceUseCase
         else
         {
             // Verifica se já existe usuário com este e-mail
-            var existingUser = await _userReadOnlyRepository.GetUserByEmail(request.Email);
+            if (!string.IsNullOrEmpty(request.Email))
+            {
+                var existingUser = await _userReadOnlyRepository.GetUserByEmail(request.Email!);
             if (existingUser != null)
             {
                 // Regra de segurança para sobrescrever conta pendente recente (tentativa de pagamento anterior falhou/desistiu)
@@ -75,6 +77,7 @@ public class CreatePaymentPreferenceUseCase : ICreatePaymentPreferenceUseCase
                     await _userWriteOnlyRepository.Delete(existingUser);
                     await _unitOfWork.Commit();
                 }
+            }
             }
 
             // Novo cadastro: criar usuário pendente
