@@ -113,7 +113,7 @@ export class Landing implements OnInit, OnDestroy {
       event: 'Chá de Panela',
       date: 'Novembro 2025',
       rating: 5,
-      text: 'Nosso chá de panela nunca seria tão organizado sem essa plataforma. As categorias de presentes facilitaram muito a escolha dos convidados.',
+      text: 'Nosso chá de panela não teria sido tão organizado sem essa plataforma. As categorias de presentes facilitaram muito a escolha dos convidados.',
       highlight: 'Convidados adoraram!'
     }
   ];
@@ -164,7 +164,7 @@ export class Landing implements OnInit, OnDestroy {
     {
       number: '2',
       title: 'Monte sua lista',
-      description: 'Escolha presentes do catálogo ou adicione personalizados'
+      description: 'Escolha presentes do catálogo ou adicione itens personalizados'
     },
     {
       number: '3',
@@ -182,7 +182,7 @@ export class Landing implements OnInit, OnDestroy {
   faqs = [
     {
       question: 'Qual o valor para usar a plataforma?',
-      answer: 'Cobramos apenas um pagamento único! Diferente de outras plataformas, não temos mensalidade nem cobramos porcentagem sobre o valor dos presentes.',
+      answer: 'Cobramos apenas um pagamento único! Ao contrário de outras plataformas, não temos mensalidade nem cobramos porcentagem sobre o valor dos presentes.',
       open: false
     },
     {
@@ -242,6 +242,32 @@ export class Landing implements OnInit, OnDestroy {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // Swipe Support
+  private touchStartX = 0;
+  private touchEndX = 0;
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+  }
+
+  private handleSwipe() {
+    const threshold = 50; // Mínimo de pixels para considerar swipe
+    const swipeDistance = this.touchEndX - this.touchStartX;
+
+    if (Math.abs(swipeDistance) > threshold) {
+      if (swipeDistance > 0) {
+        this.prevTestimonial(); // Swipe direita -> Anterior
+      } else {
+        this.nextTestimonial(); // Swipe esquerda -> Próximo
+      }
     }
   }
 }
