@@ -40,3 +40,15 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# SSL Certificates
+*.crt
+*.key
+ca.*
+cert.*
+
+# Configuration & Secrets
+/src/environments/environment.ts
+/src/environments/environment.development.ts
+appsettings.Development.json
+appsettings.json
