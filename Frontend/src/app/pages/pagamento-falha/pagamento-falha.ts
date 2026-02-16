@@ -6,7 +6,7 @@ import { UserAuthService } from '../../services/user-auth';
 @Component({
   selector: 'app-pagamento-falha',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './pagamento-falha.html',
   styleUrl: './pagamento-falha.css'
 })

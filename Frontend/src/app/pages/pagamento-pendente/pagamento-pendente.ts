@@ -8,7 +8,7 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-pagamento-pendente',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './pagamento-pendente.html',
   styleUrl: './pagamento-pendente.css'
 })
